@@ -1,10 +1,10 @@
-# Etapa 1: Construção (Usando Maven com Java 17 atualizado)
+# Etapa 1: Construção (Maven com Java 17 Temurin)
 FROM maven:3.9-eclipse-temurin-17 AS build
 WORKDIR /app
 COPY . .
 RUN mvn clean package -DskipTests
 
-# Etapa 2: Execução (Usando o Eclipse Temurin Alpine - Leve e Rápido)
+# Etapa 2: Execução (Java 17 Temurin Alpine - Leve e Rápido)
 FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
