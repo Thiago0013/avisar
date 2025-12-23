@@ -1,11 +1,11 @@
-# Etapa 1: Construção (Usa o Maven para criar o .jar)
-FROM maven:3.8.5-openjdk-17 AS build
+# Etapa 1: Construção (Usando Maven com Java 17 atualizado)
+FROM maven:3.9-eclipse-temurin-17 AS build
 WORKDIR /app
 COPY . .
 RUN mvn clean package -DskipTests
 
-# Etapa 2: Execução (Usa um Java leve apenas para rodar)
-FROM openjdk:17-jdk-slim
+# Etapa 2: Execução (Usando o Eclipse Temurin, que é o padrão atual)
+FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
